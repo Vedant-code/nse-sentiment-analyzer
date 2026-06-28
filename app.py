@@ -55,6 +55,8 @@ from render import render_dashboard, _is_valid_num
 from market_data import get_fii_dii_flow, get_market_pulse, get_mmi
 from aggregate_sentiment import compute_smartscore
 from intraday import compute_vwap, compute_pivot_levels, get_vix
+from hft_simulator import render_hft_simulator
+
 
 
 # ─── Page config ───
@@ -843,11 +845,25 @@ st.markdown(f"""
 </div>
 """, unsafe_allow_html=True)
 
+# ─── Navigation tabs ───
+view_selection = st.radio(
+    "Navigation",
+    ["📊 Sentiment & Technicals", "⚡ HFT Order Book Mocker"],
+    horizontal=True,
+    label_visibility="collapsed",
+    key="navigation_view",
+)
+
+if view_selection == "⚡ HFT Order Book Mocker":
+    render_hft_simulator()
+    st.stop()
+
 # ─── Market Pulse & VIX ───
 if "market_pulse" not in st.session_state:
     st.session_state.market_pulse = get_market_pulse()
 if "vix" not in st.session_state:
     st.session_state.vix = get_vix()
+
 
 pulse_d = st.session_state.market_pulse
 vix_d = st.session_state.vix

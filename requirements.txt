@@ -6,6 +6,8 @@ feedparser>=6.0.0
 duckduckgo_search>=8.0.0
 requests>=2.31.0
 nsepython>=1.0.0
+matplotlib
+
 # Optional: FinBERT for financial sentiment (USE_FINBERT=true)
 # Uncomment these only if you need FinBERT:
 # pip install torch transformers
